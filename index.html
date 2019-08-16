@@ -2,11 +2,11 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <script>
+        var date = '2019_8_16' // yyyymmdd로 수정
         function fetchPage(name) {
             fetch(name).then(function(response) {
                 response.text().then(function(text) {
@@ -22,9 +22,10 @@
     <h1>Rank_archive</h1>
     <div>
         <ol>
-            <li><a onclick="fetchPage('data/book/2019_8_16')">book</a></li>
-            <li><a onclick="fetchPage('movie')">movie</a></li>
-            <li><a onclick="fetchPage('ITnews')">ITnews</a></li>
+            <!--링크 리다이렉트 하기 -->
+            <li><a onclick="fetchPage('data/book/'+date+'.txt')">book</a></li>
+            <li><a onclick="fetchPage('data/movie/'+date+'.txt')">movie</a></li>
+            <li><a onclick="fetchPage('data/ITnews/'+date+'.txt')">ITnews</a></li>
         </ol>
     </div>
     <article>
