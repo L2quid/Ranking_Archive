@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function fetchPage(name) {
+            fetch(name).then(function(response) {
+                response.text().then(function(text) {
+                    document.querySelector('article').innerHTML = text;
+                })
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Rank_archive</h1>
+    <div>
+        <ol>
+            <li><a onclick="fetchPage('data/book/2019_8_16')">book</a></li>
+            <li><a onclick="fetchPage('movie')">movie</a></li>
+            <li><a onclick="fetchPage('ITnews')">ITnews</a></li>
+        </ol>
+    </div>
+    <article>
+
+    </article>
+
+</body>
+
+</html>
