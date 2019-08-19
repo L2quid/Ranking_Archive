@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Rank_Archive-QuiD</title>
+    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         var local = new Date();
@@ -44,15 +45,15 @@
 </head>
 
 <body>
-    <h1><a href="#!Welcome" onclick="fetchPage('welcome')">Rank_Archive</a></h1>
+    <h1><a class="mainTitle" href="#!Welcome" onclick="fetchPage('welcome')">Rank_Archive</a></h1>
     <div>
-        <ol>
+        <ul>
             <!--링크 리다이렉트 하기 -->
             <li><a href="#!Book" onclick="fetchPage('data/book/'+local+'.txt'),resetDate()">book</a></li>
             <li><a href="#!Movie" onclick="fetchPage('data/movie/'+local+'.txt'),resetDate()">movie</a></li>
             <li><a href="#!ITnews" onclick="fetchPage('data/ITnews/'+local+'.txt'),resetDate()">ITnews</a></li>
             <li><a href="#!Music" onclick="fetchPage('data/music/'+local+'.txt'),resetDate()">Music</a></li>
-        </ol>
+        </ul>
     </div>
     <article>
 
