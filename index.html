@@ -3,10 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Document</title>
+    <title>Rank_Archive-QuiD</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        var date = '2019_8_16' // yyyymmdd로 수정
+        var local = new Date();
+        var y = local.getFullYear();
+        var m = local.getMonth() + 1;
+        var d = local.getDate();
+        local = '' + y + (m < 10 ? '0' : '') + m + (d < 10 ? '0' : '') + d;
+        local2 = parseInt(local);
+
+        if (location.hash.substr(2) == 0) {
+            fetchPage('welcome');
+        }
+
         function fetchPage(name) {
             fetch(name).then(function(response) {
                 response.text().then(function(text) {
@@ -14,23 +24,40 @@
                 })
             });
         }
+
+        function next() {
+            index = location.hash.substr(2);
+            local2++;
+            fetchPage('data/' + index + '/' + local2 + '.txt');
+        }
+
+        function prev() {
+            index = location.hash.substr(2);
+            local2--;
+            fetchPage('data/' + index + '/' + local2 + '.txt');
+        }
+
+        function resetDate() {
+            local2 = parseInt(local);
+        }
     </script>
 </head>
 
 <body>
-    <h1>Rank_archive</h1>
+    <h1><a href="#!welcome" onclick="fetchPage('welcome')">Rank_Archive</a></h1>
     <div>
         <ol>
             <!--링크 리다이렉트 하기 -->
-            <li><a onclick="fetchPage('data/book/'+date+'.txt')">book</a></li>
-            <li><a onclick="fetchPage('data/movie/'+date+'.txt')">movie</a></li>
-            <li><a onclick="fetchPage('data/ITnews/'+date+'.txt')">ITnews</a></li>
+            <li><a href="#!book" onclick="fetchPage('data/book/'+local+'.txt'),resetDate()">book</a></li>
+            <li><a href="#!movie" onclick="fetchPage('data/movie/'+local+'.txt'),resetDate()">movie</a></li>
+            <li><a href="#!ITnews" onclick="fetchPage('data/ITnews/'+local+'.txt'),resetDate()">ITnews</a></li>
         </ol>
     </div>
     <article>
 
     </article>
-
+    <p class="next_btn" onclick="next()">앞으로</p>
+    <p class="prev_btn" onclick="prev()">뒤로</p>
 </body>
 
 </html>
