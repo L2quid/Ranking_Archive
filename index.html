@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Rank_Archive-QuiD</title>
     <link rel="stylesheet" href="main.css">
+    <script src="https://kit.fontawesome.com/b1e30c76c7.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         var local = new Date();
@@ -13,6 +14,7 @@
         var d = local.getDate();
         local = '' + y + (m < 10 ? '0' : '') + m + (d < 10 ? '0' : '') + d;
         local2 = parseInt(local);
+        start_date = parseInt(20190820);
 
         if (location.hash.substr(2) == 0) {
             fetchPage('welcome');
@@ -29,28 +31,56 @@
         function next() {
             index = location.hash.substr(2);
             local2++;
-            fetchPage('data/' + index + '/' + local2 + '.txt');
+            if (local2 > local) {
+                alert("아직 업데이트 되지 않았습니다.")
+            } else {
+                fetchPage('data/' + index + '/' + local2 + '.txt');
+            }
         }
 
         function prev() {
             index = location.hash.substr(2);
             local2--;
-            fetchPage('data/' + index + '/' + local2 + '.txt');
+            if (local2 < start_date) {
+                alert("데이터 없음")
+            } else {
+                fetchPage('data/' + index + '/' + local2 + '.txt');
+            }
         }
 
         function resetDate() {
             local2 = parseInt(local);
         }
+
+        function search_date() {
+            index = location.hash.substr(2);
+            var input = document.getElementById("key_date").value;
+            if (input > local) {
+                alert("미래의 데이터는 찾을 수 없습니다.");
+            } else if (input < start_date) {
+                alert("2019년08월19일 이전의 데이터는 조회할 수 없습니다.");
+            } else {
+                fetchPage('data/' + index + '/' + input + '.txt');
+                document.getElementById("key_date").value = ""
+            }
+
+        }
     </script>
 </head>
 
 <body>
-    <h1><a class="mainTitle" href="#!Welcome" onclick="fetchPage('welcome')">Rank_Archive</a></h1>
-    <div>
+    <div class="header">
+        <h1><a class="mainTitle" href="#!Welcome" onclick="fetchPage('welcome')">Rank_Archive</a></h1>
+        <form>
+            <input type="number" class="num" placeholder="YYYYMMDD" id="key_date">
+            <input type="submit" value="검색" class="search" onclick="search_date()">
+        </form>
+    </div>
+    <div class="nav">
         <ul>
             <!--링크 리다이렉트 하기 -->
-            <li><a href="#!Book" onclick="fetchPage('data/book/'+local+'.txt'),resetDate()">book</a></li>
-            <li><a href="#!Movie" onclick="fetchPage('data/movie/'+local+'.txt'),resetDate()">movie</a></li>
+            <li><a href="#!Book" onclick="fetchPage('data/book/'+local+'.txt'),resetDate()">Book</a></li>
+            <li><a href="#!Movie" onclick="fetchPage('data/movie/'+local+'.txt'),resetDate()">Movie</a></li>
             <li><a href="#!ITnews" onclick="fetchPage('data/ITnews/'+local+'.txt'),resetDate()">ITnews</a></li>
             <li><a href="#!Music" onclick="fetchPage('data/music/'+local+'.txt'),resetDate()">Music</a></li>
         </ul>
@@ -58,8 +88,8 @@
     <article>
 
     </article>
-    <p class="next_btn" onclick="next()">앞으로</p>
-    <p class="prev_btn" onclick="prev()">뒤로</p>
+    <p class="next_btn" onclick="next()"><i class="fas fa-angle-right"></i></p>
+    <p class="prev_btn" onclick="prev()"><i class="fas fa-angle-left"></i></p>
 </body>
 
 </html>
