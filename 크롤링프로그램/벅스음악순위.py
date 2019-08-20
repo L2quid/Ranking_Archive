@@ -14,5 +14,6 @@ with urllib.request.urlopen(url) as fs :
 desktopPath = os.path.expanduser('~')
 filePath = desktopPath + '/Documents/GitHub/Ranking_Archive/data/music/'+str(date)+'.txt'
 with open( filePath, 'w+',encoding='utf-8') as file:
+    file.write('<h3>'+date+'의 음악 순위입니다.</h3>')
     for i in range(20) :
-        file.write('<div class="rank">'+str(i + 1) + '위</div><img src="'+str(images[i+17])+'"><div class="title">' + items[i].get_text(strip = True)+'</div><div class="title">'+ names[i].get_text(strip = True)+ '</div><br>')
+        file.write('<div class="wrap"><div class="rank">'+str(i + 1) + '위</div><img src="'+str(images[i+17])+'"><div class="title">' + items[i].get_text(strip = True)+'</div><div class="title">'+ names[i].get_text(strip = True)+ '</div></div><br>')
