@@ -14,6 +14,7 @@
         var d = local.getDate();
         local = '' + y + (m < 10 ? '0' : '') + m + (d < 10 ? '0' : '') + d;
         local2 = parseInt(local);
+        start_date = parseInt(20190820);
 
         if (location.hash.substr(2) == 0) {
             fetchPage('welcome');
@@ -40,7 +41,7 @@
         function prev() {
             index = location.hash.substr(2);
             local2--;
-            if (local2 < parseInt(20190819)) {
+            if (local2 < start_date) {
                 alert("데이터 없음")
             } else {
                 fetchPage('data/' + index + '/' + local2 + '.txt');
@@ -54,15 +55,15 @@
         function search_date() {
             index = location.hash.substr(2);
             var input = document.getElementById("key_date").value;
-
             if (input > local) {
                 alert("미래의 데이터는 찾을 수 없습니다.");
-            } else if (input < parseInt(20190819)) {
+            } else if (input < start_date) {
                 alert("2019년08월19일 이전의 데이터는 조회할 수 없습니다.");
             } else {
                 fetchPage('data/' + index + '/' + input + '.txt');
                 document.getElementById("key_date").value = ""
             }
+
         }
     </script>
 </head>
@@ -78,8 +79,8 @@
     <div class="nav">
         <ul>
             <!--링크 리다이렉트 하기 -->
-            <li><a href="#!Book" onclick="fetchPage('data/book/'+local+'.txt'),resetDate()">book</a></li>
-            <li><a href="#!Movie" onclick="fetchPage('data/movie/'+local+'.txt'),resetDate()">movie</a></li>
+            <li><a href="#!Book" onclick="fetchPage('data/book/'+local+'.txt'),resetDate()">Book</a></li>
+            <li><a href="#!Movie" onclick="fetchPage('data/movie/'+local+'.txt'),resetDate()">Movie</a></li>
             <li><a href="#!ITnews" onclick="fetchPage('data/ITnews/'+local+'.txt'),resetDate()">ITnews</a></li>
             <li><a href="#!Music" onclick="fetchPage('data/music/'+local+'.txt'),resetDate()">Music</a></li>
         </ul>
