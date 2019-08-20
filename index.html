@@ -29,13 +29,21 @@
         function next() {
             index = location.hash.substr(2);
             local2++;
-            fetchPage('data/' + index + '/' + local2 + '.txt');
+            if (local2 > local) {
+                alert("아직 업데이트 되지 않았습니다.")
+            } else {
+                fetchPage('data/' + index + '/' + local2 + '.txt');
+            }
         }
 
         function prev() {
             index = location.hash.substr(2);
             local2--;
-            fetchPage('data/' + index + '/' + local2 + '.txt');
+            if (local2 < parseInt(20190819)) {
+                alert("데이터 없음")
+            } else {
+                fetchPage('data/' + index + '/' + local2 + '.txt');
+            }
         }
 
         function resetDate() {
