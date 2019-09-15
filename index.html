@@ -13,7 +13,7 @@
         var m = local.getMonth() + 1;
         var d = local.getDate();
         local = '' + y + (m < 10 ? '0' : '') + m + (d < 10 ? '0' : '') + d;
-        local2 = parseInt(local);
+        local2 = local - parseInt(20190820);
         start_date = parseInt(20190820);
 
         if (location.hash.substr(2) == 0) {
@@ -31,7 +31,7 @@
         function next() {
             index = location.hash.substr(2);
             local2++;
-            if (local2 > local) {
+            if (local2 > local - parseInt(20190820)) {
                 alert("아직 업데이트 되지 않았습니다.")
             } else {
                 fetchPage('data/' + index + '/' + local2 + '.txt');
@@ -49,12 +49,13 @@
         }
 
         function resetDate() {
-            local2 = parseInt(local);
+            local2 = local - Date(20190820);
         }
 
         function search_date() {
             index = location.hash.substr(2);
             var input = document.getElementById("key_date").value;
+            input = input - parseInt(20190820);
             if (input > local) {
                 alert("미래의 데이터는 찾을 수 없습니다.");
             } else if (input < start_date) {
