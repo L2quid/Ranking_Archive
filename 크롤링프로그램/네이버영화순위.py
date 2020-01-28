@@ -16,4 +16,4 @@ filePath = desktopPath + '/Documents/GitHub/Ranking_Archive/data/movie/'+str(dat
 with open( filePath, 'w+',encoding='utf-8') as file:
     file.write('<h3>'+date+'의 영화 순위입니다.</h3>')
     for i in range(20) :
-        file.write('<div class="wrap"><div class="rank">'+str(i + 1) + '위</div><img src="'+images[i+74]+'"><div class="title"> ' +items[i].contents[3].get_text(strip = True)+'</div></div><br>')
+        file.write('<div class="wrap"><div class="rank">'+str(i + 1) + '위</div><img src="'+images[i+74]+'"><div class="title"> ' +items[i].contents[3].get_text(strip = True)+'</div></div>')
